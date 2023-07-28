@@ -2,8 +2,22 @@
 var drums = document.querySelectorAll(".drum");
 
 // Function to play the corresponding sound for a given button
-function playSound(btn) {
-  switch (btn) {
+
+// Add click event listeners to each drum element
+for (var i = 0; i < drums.length; i++) {
+  drums[i].addEventListener("click", function() {
+    var btn = this.innerHTML;
+     eve(btn);
+     buttonAnimation(btn);
+  });
+}
+
+document.addEventListener("keydown" , function(event){
+   eve(event.key);
+   buttonAnimation(event.key);
+})
+function eve(eventt){
+  switch (eventt) {
     case "l":
       var audio = new Audio("sounds/kick-bass.mp3");
       audio.play();
@@ -34,16 +48,12 @@ function playSound(btn) {
       break;
     default:
       console.log(btn);
-  }
 }
-
-// Add click event listeners to each drum element
-for (var i = 0; i < drums.length; i++) {
-  drums[i].addEventListener("click", function() {
-    var btn = this.innerHTML;
-    playSound(btn);
-  });
 }
-
-// var audio= new  Audio("sounds/crash.mp3");
-// audio.play();
+function buttonAnimation(btn){
+   var x = document.querySelector("."+ btn);
+    x.classList.add("pressed");
+    setTimeout(function(){
+      x.classList.remove("pressed");
+    }, 100);
+}
